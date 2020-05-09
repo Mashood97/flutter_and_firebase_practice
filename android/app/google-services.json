@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "351829573594",
+    "firebase_url": "https://practicefluter.firebaseio.com",
+    "project_id": "practicefluter",
+    "storage_bucket": "practicefluter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351829573594:android:8e7f9fd650dfb76a684ae3",
+        "android_client_info": {
+          "package_name": "com.challenge.flutterandfirebasepractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "351829573594-09empbqrbp0g85t9oj814g0gvtea12eq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbA5BS6wZZkETgUNt14C8Lolm9x4JN3i4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "351829573594-09empbqrbp0g85t9oj814g0gvtea12eq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
