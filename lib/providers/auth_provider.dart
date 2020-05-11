@@ -153,19 +153,19 @@ class AuthProvider with ChangeNotifier {
     pref.clear();
   }
 
-  Future<void> markAttendanceOfUser(String userIds, String Username,
+  Future<void> markAttendanceOfUser(String userIds, String usernames,
       DateTime datatime, bool attendance) async {
     try {
       String formattedDate =
           DateFormat('yyyy-MM-dd – HH:mm:ss').format(datatime);
-      await _firestore.collection('Attendance').document().collection(userName).add(({
-          'userId': userIds,
-          'Username': Username,
-          'datatime': formattedDate,
-          'attendance': attendance,
-        }));
+      await _firestore.collection('Attendance').add(({
+            'userId': userIds,
+            'Username': usernames,
+            'datatime': formattedDate,
+            'attendance': attendance,
+          }));
       _AttendanceList.add(AttendanceUser(
-        name: Username,
+        name: usernames,
         id: userIds,
         dateTime: formattedDate,
         attendance: attendance,
@@ -174,7 +174,7 @@ class AuthProvider with ChangeNotifier {
       final sharefPref = await SharedPreferences.getInstance();
       final attendanceData = json.encode({
         'userId': userIds,
-        'Username': Username,
+        'Username': usernames,
         'datatime': formattedDate,
         'attendance': attendance,
       });
@@ -183,6 +183,4 @@ class AuthProvider with ChangeNotifier {
       throw e;
     }
   }
-
-  Future<void> getAllData() {}
 }
