@@ -27,12 +27,13 @@ class SetupScreen extends StatelessWidget {
               primarySwatch: Colors.blue,
               accentColor: Colors.amber,
               textTheme: TextTheme(
-                title: TextStyle(
+                headline6: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
-                subtitle: TextStyle(
+             
+                subtitle2: TextStyle(
                   color: Colors.grey,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

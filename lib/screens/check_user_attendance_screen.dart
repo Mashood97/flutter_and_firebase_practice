@@ -7,13 +7,13 @@ import '../widgets/task_list.dart';
 class CheckUserAttendanceScreen extends StatelessWidget {
   static const routeArgs = '/check-screen';
 
-  void getdaata(BuildContext context) async {
-    final data =
-        await Firestore.instance.collection('Attendance').getDocuments();
-    for (var d in data.documents) {
-      print(d.data);
-    }
-  }
+  // void getdaata(BuildContext context) async {
+  //   final data =
+  //       await Firestore.instance.collection('Attendance').getDocuments();
+  //   for (var d in data.documents) {
+  //     print(d.data);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

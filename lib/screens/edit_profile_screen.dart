@@ -20,7 +20,7 @@ class EditProfile extends StatelessWidget {
         FlatButton(
           child: Text(
             'Add Photo',
-            style: Theme.of(context).textTheme.title.copyWith(fontSize: 16),
+            style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 16),
           ),
           onPressed: () {},
           color: Colors.purple,

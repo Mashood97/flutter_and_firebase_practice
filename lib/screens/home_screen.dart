@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(35),
+                      borderRadius: BorderRadius.circular(50),
                       child: FadeInImage(
                         fit: BoxFit.cover,
                         placeholder: NetworkImage(userdata.photoUrl),
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Text(
                     userdata.userName,
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ],
               ),

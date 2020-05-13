@@ -37,7 +37,7 @@ class GridItem extends StatelessWidget {
                 title,
                 style: Theme.of(context)
                     .textTheme
-                    .title
+                    .headline6
                     .copyWith(color: Colors.black, fontSize: 16),
               ),
             ],

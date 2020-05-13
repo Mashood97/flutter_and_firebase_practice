@@ -31,7 +31,7 @@ class AttendanceUser {
 
 class AuthProvider with ChangeNotifier {
   List<AuthUser> _usersList = [];
-  List<AttendanceUser> _AttendanceList = [];
+  List<AttendanceUser> _attendanceList = [];
 
   String _userId;
   String _userName;
@@ -46,11 +46,11 @@ class AuthProvider with ChangeNotifier {
 
   List<AuthUser> get getUserList => [..._usersList];
 
-  List<AttendanceUser> get getAttendanceList => [..._AttendanceList];
+  List<AttendanceUser> get getAttendanceList => [..._attendanceList];
 
   int get getUserListLength => _usersList.length;
 
-  int get getAttendanceListLength => _AttendanceList.length;
+  int get getAttendanceListLength => _attendanceList.length;
 
   String get userId => _userId;
 
@@ -164,7 +164,7 @@ class AuthProvider with ChangeNotifier {
             'datatime': formattedDate,
             'attendance': attendance,
           }));
-      _AttendanceList.add(AttendanceUser(
+      _attendanceList.add(AttendanceUser(
         name: usernames,
         id: userIds,
         dateTime: formattedDate,

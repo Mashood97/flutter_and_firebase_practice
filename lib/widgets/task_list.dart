@@ -17,7 +17,7 @@ class TaskList extends StatelessWidget {
               backgroundColor: Theme.of(context).accentColor,
               child: Text(
                 '#${i + 1}',
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
             title: Text(
