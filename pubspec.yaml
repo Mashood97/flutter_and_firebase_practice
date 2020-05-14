@@ -26,6 +26,7 @@ dependencies:
   provider: 3.0.0
   flutter_signin_button: ^1.0.0
   flare_flutter: ^2.0.3
+  geolocator: ^5.3.1
   shared_preferences:
   firebase_auth:
   google_sign_in:

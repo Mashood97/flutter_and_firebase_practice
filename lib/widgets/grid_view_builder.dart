@@ -5,6 +5,7 @@ import 'package:flutterandfirebasepractice/screens/edit_profile_screen.dart';
 import '../widgets/grid_view_item.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import 'package:geolocator/geolocator.dart';
 
 class GridViewBuilder extends StatefulWidget {
   final String userid;
@@ -17,20 +18,75 @@ class GridViewBuilder extends StatefulWidget {
 }
 
 class _GridViewBuilderState extends State<GridViewBuilder> {
-  
   var data = [];
+  int i = 0;
+  void markAttendance() async {
+    if (i == 0) {
+      Position position = await Geolocator()
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
 
-  
-  void markAttendance() {
-    Provider.of<AuthProvider>(context)
-        .markAttendanceOfUser(
-            widget.userid, widget.userName, DateTime.now(), true)
-        .then((_) {
+      print(position.longitude);
+      print('${position.latitude} latlng');
+      final double distance = await Geolocator().distanceBetween(
+          position.latitude, position.longitude, 24.931225, 67.062711);
+      print('$distance distaance total');
+      if (distance < 20) {
+        Provider.of<AuthProvider>(context)
+            .markAttendanceOfUser(
+                widget.userid, widget.userName, DateTime.now(), true)
+            .then((_) {
+          showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                    title: Text('Success'),
+                    content: Text('Attendance Marked Successfully'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'OK',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        color: Theme.of(context).accentColor,
+                      )
+                    ],
+                  ));
+        });
+        i++;
+      } else {
+        showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Text('Failed'),
+                  content: Text('Please Reach Daily Foods Headoffice'),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'OK',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      color: Theme.of(context).accentColor,
+                    )
+                  ],
+                ));
+      }
+    } else {
       showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-                title: Text('Success'),
-                content: Text('Attendance Marked Successfully'),
+                title: Text('Done'),
+                content: Text('You have already marked Attendance'),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -41,26 +97,44 @@ class _GridViewBuilderState extends State<GridViewBuilder> {
                     },
                     child: Text(
                       'OK',
-                      style: Theme.of(context).textTheme.title,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                     color: Theme.of(context).accentColor,
                   )
                 ],
               ));
-    });
+    }
   }
 
-  void checkAttendance(){
+  void checkAttendance() {
     Navigator.of(context).pushNamed(CheckUserAttendanceScreen.routeArgs);
-  }  
+  }
 
+  void editProfile() {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: Text('Success'),
+              content: Text('Under Development'),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    'OK',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  color: Theme.of(context).accentColor,
+                )
+              ],
+            ));
+  }
 
-  
-  void editProfile(){
-    Navigator.of(context).pushNamed(EditProfile.routeArgs);
-  }  
-
-void checkSalary(){
+  void checkSalary() {
     Navigator.of(context).pushNamed(CheckSalary.routeArgs);
   }
 
@@ -87,7 +161,6 @@ void checkSalary(){
         'color': Colors.deepOrangeAccent,
         'function': editProfile,
       },
-
       {
         'title': 'Check Salary',
         'icon': Icons.attach_money,

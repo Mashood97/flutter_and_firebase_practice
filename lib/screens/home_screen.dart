@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userdata = Provider.of<AuthProvider>(context, listen: false);
+    final userdata = Provider.of<AuthProvider>(context);
     return Scaffold(
       body: SafeArea(
           child: Column(

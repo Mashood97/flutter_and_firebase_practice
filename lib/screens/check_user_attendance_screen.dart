@@ -27,6 +27,7 @@ class CheckUserAttendanceScreen extends StatelessWidget {
           stream: Firestore.instance
               .collection('Attendance')
               .where('Username', isEqualTo: userData.userName)
+              .orderBy('datatime')
               .snapshots(),
           builder: (ctx, snapshot) {
             if (!snapshot.hasData) {

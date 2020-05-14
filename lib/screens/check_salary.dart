@@ -60,7 +60,7 @@ class CheckSalary extends StatelessWidget {
   static const routeArgs = '/checksalary';
   @override
   Widget build(BuildContext context) {
-    var userdata = Provider.of<AuthProvider>(context,listen: false);
+    var userdata = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Check Salary'),
@@ -68,67 +68,69 @@ class CheckSalary extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please provide a value.';
-                  }
-                  return null;
-                },
-                onChanged: (value) => salary = value,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    alignLabelWithHint: true,
-                    labelText: 'Enter Your Salary',
-                    prefix: Icon(
-                      Icons.attach_money,
-                      color: Theme.of(context).primaryColor,
-                    )),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              RaisedButton(
-                onPressed: () {
-                  if (salary == null) {
-                    showDialog(
-                        context: context,
-                        builder: (ctx) => AlertDialog(
-                              title: Text(
-                                'Error',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              content: Text(
-                                'Please Enter Salary',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              actions: [
-                                FlatButton(
-                                  color: Colors.purple,
-                                  child: Text('OK'),
-                                  onPressed: () {
-                                    Navigator.of(ctx).pop(true);
-                                  },
-                                ),
-                              ],
-                            ));
-                  }
-                  calculatesalary(
-                      context, userdata.userName, int.parse(salary));
-                },
-                child: Text(
-                  'Get Salary',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please provide a value.';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) => salary = value,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      alignLabelWithHint: true,
+                      labelText: 'Enter Your Salary',
+                      prefix: Icon(
+                        Icons.attach_money,
+                        color: Theme.of(context).primaryColor,
+                      )),
                 ),
-                color: Colors.amber,
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    if (salary == null) {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                                title: Text(
+                                  'Error',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                content: Text(
+                                  'Please Enter Salary',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                actions: [
+                                  FlatButton(
+                                    color: Colors.purple,
+                                    child: Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(ctx).pop(true);
+                                    },
+                                  ),
+                                ],
+                              ));
+                    }
+                    calculatesalary(
+                        context, userdata.userName, int.parse(salary));
+                  },
+                  child: Text(
+                    'Check Salary',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  color: Colors.amber,
+                ),
+              ],
+            ),
           ),
         ),
       ),

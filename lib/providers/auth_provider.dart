@@ -38,6 +38,7 @@ class AuthProvider with ChangeNotifier {
   String _email;
   String _photoUrl;
   String _isActive = '1';
+  String datetime;
   var documentId;
 
   bool get isAuth {
@@ -61,6 +62,8 @@ class AuthProvider with ChangeNotifier {
   String get photoUrl => _photoUrl;
 
   String get isActive => _isActive;
+
+  String get getDateTime => datetime;
 
   Future<FirebaseUser> signInwithGoogle() async {
     try {
@@ -97,6 +100,7 @@ class AuthProvider with ChangeNotifier {
       _email = user.email;
       _photoUrl = user.photoUrl;
       _userName = user.displayName;
+      datetime =  DateFormat().add_yMMMEd().format(DateTime.now());
 
       notifyListeners();
 
@@ -181,6 +185,57 @@ class AuthProvider with ChangeNotifier {
       sharefPref.setString('attendanceData', attendanceData);
     } catch (e) {
       throw e;
+    }
+  }
+
+  Future<void> handleSignIn() async {
+    try {
+      GoogleSignIn _googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+        clientId: 'xDSPh3cynVpXx9fyLHG53wWj',
+        signInOption: SignInOption.standard,
+         
+      );
+      await _googleSignIn.signIn().then((value) async {
+        _usersList.add(
+          AuthUser(
+            userid: _googleSignIn.currentUser.id,
+            email: _googleSignIn.currentUser.email,
+            photourl: _googleSignIn.currentUser.photoUrl,
+            username: _googleSignIn.currentUser.displayName,
+          ),
+        );
+
+        documentId = _firestore.collection('Users').add({
+          'email': _googleSignIn.currentUser.email,
+          'userPhoto': _googleSignIn.currentUser.photoUrl,
+          'userName': _googleSignIn.currentUser.displayName,
+          'dateTime': DateFormat().add_yMMMEd().format(DateTime.now()),
+          'isActive': _isActive,
+        });
+
+        _userId = _googleSignIn.currentUser.id;
+        _email = _googleSignIn.currentUser.email;
+        _photoUrl = _googleSignIn.currentUser.photoUrl;
+        _userName = _googleSignIn.currentUser.displayName;
+
+        notifyListeners();
+
+        final sharefPref = await SharedPreferences.getInstance();
+        final userData = json.encode({
+          'userid': _userId,
+          'username': _userName,
+          'email': _email,
+          'userphoto': _photoUrl,
+          'isActive': _isActive,
+        });
+        sharefPref.setString('AuthData', userData);
+      });
+    } catch (error) {
+      print(error);
     }
   }
 }

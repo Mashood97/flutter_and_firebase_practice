@@ -3,6 +3,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import '../screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AuthScreen extends StatelessWidget {
   static const routeArgs = '/auth-screen';
@@ -48,13 +49,14 @@ class AuthScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      onPressed: () {
-                        Provider.of<AuthProvider>(context, listen: false)
-                            .signInwithGoogle()
-                            .then((_) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(HomeScreen.routeArgs);
-                        });
+                      onPressed: () async {
+                      
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .signInwithGoogle()
+                              .then((_) {
+                            Navigator.of(context)
+                                .pushReplacementNamed(HomeScreen.routeArgs);
+                          });
                       },
                     ),
                   ],
